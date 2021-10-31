@@ -19,8 +19,8 @@ def Derivar():
     calcular = diff(valor, x)
     resultado.set(calcular)
 
-btn = Button(root, text="Cacular", command=Derivar)
-btn.grid(row=2, column=0, columnspan=2)
+btn = Button(root, text="Cacular", width=33 , background="#eee" ,command=Derivar)
+btn.grid(row=2, column=0, columnspan=1)
 
 
 resultado = StringVar()
