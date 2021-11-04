@@ -22,15 +22,34 @@ t = Symbol("t")
 #--------------------------------------------------APLICACION----------------------------------------------------------#
 root = Tk()
 root.title("Derivadas de Funciones Reales de una Sola variable")
+
+def render_funciones():
+    cursor.execute("SELECT * FROM Funciones")
+
+    rows = cursor.fetchall()
+
+    tree.delete(*tree.get_children()) #*IMPORTANTE CUANDO QUIERO RENDERIZAR
+
+    for row in rows:
+        tree.insert("", END, row[0], values=(row[1], row[2]))
+
+def insertar(datos):
+    cursor.execute("""INSERT INTO Funciones (funciones, resultados) VALUES(%s, %s)""", (datos["funcion"], datos["resultado"]))
+    midb.commit()
+    render_funciones()
+
 def Derivate():
     funtion_get = funcion.get()
     calculation = diff(funtion_get, x)
     str_calculation = str(calculation)
     answare.set(str_calculation)
 
-    cursor.execute("""INSERT INTO Funciones (funciones, resultados) VALUES(%s, %s)""", (funcion.get(), str_calculation))
-    midb.commit()
+    datos = {
+        "funcion": funcion.get(),
+        "resultado": str_calculation
+    }
 
+    insertar(datos)
     funcion.delete(0, END)
 
 funcion = Entry(root, width=40)
@@ -44,6 +63,7 @@ resultado. grid(row=1, column= 0, columnspan=2, sticky="we")
 btn_calculo = Button(root, text="Calcular", command = Derivate)
 btn_calculo.grid(row=2, column=0, columnspan=2, sticky="we")
 
+#-------------------TABLA--------------------
 tree = ttk.Treeview()
 tree["columns"] = ("Funciones", "Resultados")
 tree.column("#0", width=0, stretch=NO)
@@ -55,7 +75,6 @@ tree.heading("Resultados", text="Resultados")
 
 tree.grid(row=3, column=0, columnspan=2)
 
-#cursor.execute("""INSERT INTO Funciones (funciones, resultados) VALUES (%s, %s)""", ())
-#midb.commit()
+render_funciones()
 
 root.mainloop()
