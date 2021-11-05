@@ -19,7 +19,7 @@ y = Symbol("y")
 q = Symbol("q")
 t = Symbol("t")
 
-#--------------------------------------------------APLICACION----------------------------------------------------------#
+#--------------------------------------------------APLICACION--------------------------------------------------------------#
 root = Tk()
 root.title("Derivadas de Funciones Reales de una Sola variable")
 
@@ -63,7 +63,7 @@ resultado. grid(row=1, column= 0, columnspan=2, sticky="we")
 btn_calculo = Button(root, text="Calcular", command = Derivate)
 btn_calculo.grid(row=2, column=0, columnspan=2, sticky="we")
 
-#-------------------TABLA--------------------
+#-------------------TABLA--------------------#
 tree = ttk.Treeview()
 tree["columns"] = ("Funciones", "Resultados")
 tree.column("#0", width=0, stretch=NO)
