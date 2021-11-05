@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 from sympy import *
 import mysql.connector
 
@@ -42,7 +42,7 @@ def Derivate():
     funtion_get = funcion.get()
     calculation = diff(funtion_get, x)
     str_calculation = str(calculation)
-    answare.set(str_calculation)
+    answare.set(f"f'(x) = {str_calculation}")
 
     datos = {
         "funcion": funcion.get(),
@@ -51,6 +51,21 @@ def Derivate():
 
     insertar(datos)
     funcion.delete(0, END)
+
+def Eliminar_Funcion():
+    id = tree.selection()[0]
+
+    cursor.execute("SELECT * FROM Funciones WHERE id = %s", (id, ))
+    funcion = cursor.fetchone()
+
+    respuesta = messagebox.askokcancel("¿Seguro?", f"Estas seguro de eliminar la funcion {funcion[1]}?")
+
+    if respuesta:
+        cursor.execute("DELETE FROM Funciones WHERE id = %s", (id, ))
+        midb.commit()
+        render_funciones()
+    else:
+        pass
 
 funcion = Entry(root, width=40)
 funcion.focus()
@@ -62,6 +77,9 @@ resultado. grid(row=1, column= 0, columnspan=2, sticky="we")
 
 btn_calculo = Button(root, text="Calcular", command = Derivate)
 btn_calculo.grid(row=2, column=0, columnspan=2, sticky="we")
+
+btn_borrar = Button(root, text="Eliminar", command = Eliminar_Funcion)
+btn_borrar.grid(row=4, column=0, columnspan=2, sticky="we")
 
 #-------------------TABLA--------------------#
 tree = ttk.Treeview()
