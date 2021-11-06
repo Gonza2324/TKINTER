@@ -95,4 +95,5 @@ tree.grid(row=3, column=0, columnspan=2)
 
 render_funciones()
 
+root.bind("<Return>", lambda x:Derivate())
 root.mainloop()
