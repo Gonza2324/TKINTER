@@ -1,6 +1,6 @@
 # TKINTER
 
- El proyecto Derivadas es una aplicacion que nos permitira:
+El proyecto Derivadas es una aplicacion que nos permitira:
 ###   1. Derivar una funcion
 #   2. Agregar esa funcion a la base de datos (MySQL)
 #   3. Mostrar esa funcion y su resultado en una tabla en la aplicacion
