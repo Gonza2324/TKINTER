@@ -76,9 +76,23 @@ resultado = Label(root, textvariable=answare)
 resultado. grid(row=1, column= 0, columnspan=2, sticky="we")
 
 btn_calculo = Button(root, text="Calcular", command = Derivate)
+btn_calculo.config(
+    fg="black",
+    background="#008000",
+    bd= 1,
+    relief=SOLID,
+    font=("Arial", 12)
+)
 btn_calculo.grid(row=2, column=0, columnspan=2, sticky="we")
 
 btn_borrar = Button(root, text="Eliminar", command = Eliminar_Funcion)
+btn_borrar.config(
+    fg="black",
+    background="#CC3300",
+    bd=1,
+    relief=SOLID,
+    font=("Arial", 12)
+)
 btn_borrar.grid(row=4, column=0, columnspan=2, sticky="we")
 
 #-------------------TABLA--------------------#
